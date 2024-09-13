@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentor - Financial Statement Reader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Fundamentor</h1>
+        </nav>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h2>Say Goodbye To Boring Financial Statements</h2>
+            <p>Discover and analyze financial statements with us.</p>
+            <form class="search-form" action="/" method="GET">
+                <input type="text" name="query" placeholder="Type AAPL..." required>
+                <button type="submit">
+                    <img src="{{ url_for('static', filename='icons/search-icon.svg') }}" alt="Search" style="width: 16px; height: 16px;">
+                </button>
+            </form>
+        </section>
+
+        {% if company_data %}
+        <section class="health-metrics">
+            <div class="metric-card">
+                <h3>Market Cap:</h3>
+                <div class="value">{{ company_data.market_cap }}</div>
+                <div class="explanation">
+                    The market cap of the company is {{ company_data.market_cap }}, which reflects the total market value based on its stock price, indicating the company's size.
+                </div>
+            </div>
+            <div class="metric-card">
+                <h3>PE Ratio:</h3>
+                <div class="value">{{ company_data.pe_ratio }}</div>
+                <div class="explanation">
+                    The P/E Ratio is {{ company_data.pe_ratio }}, meaning it would take approximately {{ company_data.pe_ratio }} years for the company's earnings to match its current stock price, based on today's earnings levels.
+                </div>
+            </div>
+            <div class="metric-card">
+                <h3>ROE (Return on Equity):</h3>
+                <div class="value">{{ company_data.roe }}</div>
+                <div class="explanation">
+                    The company has a Return on Equity of {{ company_data.roe }}, showing that for every dollar invested by shareholders, the company generates {{ company_data.roe }} in profit.
+                </div>
+            </div>
+            <div class="metric-card">
+                <h3>Debt to Equity:</h3>
+                <div class="value">{{ company_data.debt_to_equity }}</div>
+                <div class="explanation">
+                    With a Debt to Equity ratio of {{ company_data.debt_to_equity }}, the company uses ${{ company_data.debt_to_equity }} in debt for every $1.00 of equity, indicating a balanced approach to using borrowed funds versus owned capital.
+                </div>
+            </div>
+            <div class="metric-card">
+                <h3>Price to Book (P/B Ratio):</h3>
+                <div class="value">{{ company_data.p_b_ratio }}</div>
+                <div class="explanation">
+                    The P/B Ratio of {{ company_data.p_b_ratio }} suggests the stock is trading at {{ company_data.p_b_ratio }} times its book value, which could indicate whether the stock is overvalued or undervalued compared to its assets.
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Fundamentor. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
